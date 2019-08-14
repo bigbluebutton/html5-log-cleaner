@@ -1,0 +1,11 @@
+[Unit]
+Description=Monitor the HTML5 nginx log, scrub, and store into another log file for graylog.
+
+[Service]
+Environment=LANG=en_US.UTF-8
+ExecStart=/bin/sh -c "/usr/bin/tail -F -n0 /var/log/nginx/bigbluebutton_html5_client.log | LOG_PATH=/var/log/bigbluebutton/html5-client.log /usr/local/bin/html5-log-cleaner.rb"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
